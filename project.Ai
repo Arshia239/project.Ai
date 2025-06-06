@@ -1,0 +1,130 @@
+recipes = {
+    "pasta": {
+        "ingredients": ["pasta", "tomato", "garlic", "olive oil"],
+        "instructions": "Boil pasta. Cook tomato and garlic in olive oil. Mix and serve."
+    },
+    "omelette": {
+        "ingredients": ["eggs", "salt", "pepper", "butter"],
+        "instructions": "Beat eggs. Cook in butter. Add salt and pepper."
+    },
+    "salad": {
+        "ingredients": ["lettuce", "tomato", "cucumber", "olive oil"],
+        "instructions": "Chop vegetables. Add olive oil. Mix well."
+    },
+    "rice": {
+        "ingredients": ["rice", "water", "salt"],
+        "instructions": "Boil water, add rice and salt, cook until done."
+    },
+    "sandwich": {
+        "ingredients": ["bread", "cheese", "tomato", "lettuce", "mayonnaise"],
+        "instructions": "Place cheese, tomato, and lettuce between slices of bread. Add mayonnaise."
+    },
+    "fried rice": {
+        "ingredients": ["rice", "egg", "carrot", "peas", "soy sauce"],
+        "instructions": "Cook rice. Stir-fry with veggies, egg, and soy sauce."
+    },
+    "pancakes": {
+        "ingredients": ["flour", "milk", "egg", "sugar", "butter"],
+        "instructions": "Mix ingredients. Cook batter on a pan with butter."
+    },
+    "noodles": {
+        "ingredients": ["noodles", "soy sauce", "garlic", "vegetables"],
+        "instructions": "Boil noodles. Stir-fry with garlic, vegetables, and soy sauce."
+    },
+    "chicken curry": {
+        "ingredients": ["chicken", "onion", "garlic", "tomato", "spices"],
+        "instructions": "Cook onion, garlic, and tomato with spices. Add chicken and simmer."
+    },
+    "banana smoothie": {
+        "ingredients": ["banana", "milk", "honey"],
+        "instructions": "Blend banana with milk and honey. Serve chilled."
+    },
+    "burger": {
+        "ingredients": ["bun", "patty", "lettuce", "tomato", "cheese"],
+        "instructions": "Grill patty. Assemble with bun, cheese, and vegetables."
+    },
+    "soup": {
+        "ingredients": ["water", "vegetables", "salt", "pepper"],
+        "instructions": "Boil vegetables in water with salt and pepper."
+    },
+    "pizza": {
+        "ingredients": ["pizza base", "cheese", "tomato sauce", "toppings"],
+        "instructions": "Spread sauce on base. Add toppings and cheese. Bake until golden."
+    },
+    "dal": {
+        "ingredients": ["lentils", "water", "turmeric", "salt", "ghee"],
+        "instructions": "Boil lentils with turmeric and salt. Add ghee for flavor."
+    },
+    "roti": {
+        "ingredients": ["flour", "water", "salt"],
+        "instructions": "Knead dough, roll flat, cook on hot pan until golden."
+    },
+    "idli": {
+        "ingredients": ["rice", "urad dal", "salt"],
+        "instructions": "Grind rice and dal. Ferment, then steam the batter in molds."
+    },
+    "dosa": {
+        "ingredients": ["rice", "urad dal", "oil"],
+        "instructions": "Grind, ferment batter. Spread on pan with oil. Cook till crispy."
+    },
+    "biryani": {
+        "ingredients": ["rice", "chicken", "yogurt", "spices", "onion"],
+        "instructions": "Layer cooked rice with marinated chicken. Steam together."
+    },
+    "kheer": {
+        "ingredients": ["milk", "rice", "sugar", "cardamom", "nuts"],
+        "instructions": "Boil rice in milk. Add sugar and cardamom. Garnish with nuts."
+    },
+    "cutlet": {
+        "ingredients": ["potato", "vegetables", "bread crumbs", "spices"],
+        "instructions": "Mash veggies. Shape and coat with crumbs. Fry until golden."
+    },
+    "poha": {
+        "ingredients": ["flattened rice", "onion", "mustard seeds", "turmeric", "lemon"],
+        "instructions": "Soak poha. Fry with spices and onion. Add lemon juice."
+    },
+    "upma": {
+        "ingredients": ["semolina", "vegetables", "mustard seeds", "curry leaves"],
+        "instructions": "Roast semolina. Cook with fried veggies and spices."
+    },
+    "chapati": {
+        "ingredients": ["flour", "water", "salt"],
+        "instructions": "Knead dough, roll into circles, and cook on tawa."
+    },
+    "paneer curry": {
+        "ingredients": ["paneer", "tomato", "onion", "spices", "cream"],
+        "instructions": "Cook onion and tomato with spices. Add paneer and cream."
+    },
+    "lassi": {
+        "ingredients": ["yogurt", "sugar", "water"],
+        "instructions": "Blend yogurt with water and sugar. Serve cold."
+    }
+}
+
+def find_recipe(user_input):
+    user_input = user_input.lower()
+    for recipe_name in recipes:
+        if recipe_name in user_input:
+            return recipe_name
+        for ingredient in recipes[recipe_name]["ingredients"]:
+            if ingredient in user_input:
+                return recipe_name
+    return None
+
+# Chatbot loop
+print(" Welcome to RecipeBot! Ask me for a recipe (e.g., 'How to make pizza?' or 'I have potatoes').")
+print("Type 'exit' to end the chat.")
+
+while True:
+    user_input = input("You: ")
+    if user_input.lower() in ["exit", "quit", "bye"]:
+        print("RecipeBot: Goodbye! Happy cooking! ")
+        break
+    match = find_recipe(user_input)
+    if match:
+        recipe = recipes[match]
+        print(f"\n🍴 Recipe: {match.title()}")
+        print("Ingredients:", ", ".join(recipe["ingredients"]))
+        print("Instructions:", recipe["instructions"], "\n")
+    else:
+        print("RecipeBot: Sorry, I couldn't find a recipe for that. Try using a food name or ingredient.\n")
